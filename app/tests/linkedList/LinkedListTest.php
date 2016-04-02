@@ -1,6 +1,6 @@
 <?php
 
-namespace app\tests;
+namespace app\tests\linkedList;
 
 use app\src\linkedList\singly\LinkedList;
 use app\src\linkedList\singly\LinkedListHelper;
