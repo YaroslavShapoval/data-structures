@@ -40,24 +40,6 @@ abstract class AbstractList implements ListInterface, \Iterator
     /**
      * @inheritdoc
      */
-    public function toArray()
-    {
-        $array = [];
-
-        if ($this->firstNode === null) {
-            return $array;
-        }
-
-        foreach ($this as $node) {
-            $array[] = $node->getData();
-        }
-
-        return $array;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function clear()
     {
         $this->firstNode = null;
@@ -65,20 +47,57 @@ abstract class AbstractList implements ListInterface, \Iterator
         $this->size = 0;
     }
 
-    // Add item to the begiining of the list
+    /**
+     * @inheritdoc
+     */
+    public function getFirst()
+    {
+        return $this->firstNode;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFirst(ListNodeInterface $node = null)
+    {
+        $this->firstNode = &$node;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLast()
+    {
+        return $this->lastNode;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setLast(ListNodeInterface $node = null)
+    {
+        $this->lastNode = &$node;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function addFirst($value)
     {
         return $this->add($value, 0);
     }
 
-    // Add item to the end of the list
+    /**
+     * @inheritdoc
+     */
     public function addLast($value)
     {
         return $this->add($value, $this->getSize());
     }
 
-    // Add item before the first found node, which data equals of $queue
-    // If node with search value does not found, item does not adding
+    /**
+     * @inheritdoc
+     */
     public function addBefore($value, $queue)
     {
         $position = $this->getPosition($queue);
@@ -90,8 +109,9 @@ abstract class AbstractList implements ListInterface, \Iterator
         return $this->add($value, $position);
     }
 
-    // Add item after the first found node, which data equals of $queue
-    // If node with search value does not found, item does not adding
+    /**
+     * @inheritdoc
+     */
     public function addAfter($value, $queue)
     {
         $position = $this->getPosition($queue);
@@ -113,7 +133,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     public function rewind()
     {
         $this->currentPosition = 0;
-        $this->currentNode = $this->firstNode;
+        $this->currentNode = $this->getFirst();
     }
 
     /**

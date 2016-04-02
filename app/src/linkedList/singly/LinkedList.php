@@ -15,24 +15,24 @@ class LinkedList extends AbstractList
 
         if ($position === 0) {
             // First
-            $node->setNext($this->firstNode);
-            $this->firstNode = &$node;
+            $node->setNext($this->getFirst());
+            $this->setFirst($node);
 
-            if ($this->lastNode === null) {
-                $this->lastNode = &$node;
+            if ($this->getLast() === null) {
+                $this->setLast($node);
             }
         } elseif ($position >= $this->getSize()) {
             // Last
-            if ($this->firstNode === null) {
+            if ($this->getFirst() === null) {
                 return $this->add($value);
             }
 
-            $this->lastNode->setNext($node);
-            $this->lastNode = &$node;
+            $this->getLast()->setNext($node);
+            $this->setLast($node);
         } else {
             // Somewhere in the middle
-            $curr = $this->firstNode;
-            $prev = $this->firstNode;
+            $curr = $this->getFirst();
+            $prev = $this->getFirst();
 
             for ($i = 0; $i < $position && $i < $this->getSize(); $i++) {
                 $prev = $curr;
@@ -65,7 +65,7 @@ class LinkedList extends AbstractList
 
                 if ($next === null) {
                     $prev->setNext(null);
-                    $this->lastNode = &$prev;
+                    $this->setLast($prev);
                 } else {
                     $prev->setNext($next);
                 }
@@ -96,7 +96,7 @@ class LinkedList extends AbstractList
             return true;
         }
 
-        $this->firstNode = $this->firstNode->getNext();
+        $this->setFirst($this->getFirst()->getNext());
         $this->size--;
 
         return true;
@@ -117,8 +117,8 @@ class LinkedList extends AbstractList
             return true;
         }
 
-        $prev = $this->firstNode;
-        $curr = $this->firstNode->getNext();
+        $prev = $this->getFirst();
+        $curr = $this->getFirst()->getNext();
  
         while ($curr->getNext() !== null) {
             $prev = $curr;
@@ -126,7 +126,7 @@ class LinkedList extends AbstractList
         }
  
         $prev->setNext(null);
-        $this->lastNode = &$prev;
+        $this->setLast($prev);
         $this->size--;
 
         return true;
