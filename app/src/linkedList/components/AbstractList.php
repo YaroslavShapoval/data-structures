@@ -82,7 +82,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     /**
      * @inheritdoc
      */
-    public function addFirst($value)
+    public function addFirst($value = null)
     {
         return $this->add($value, 0);
     }
@@ -90,7 +90,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     /**
      * @inheritdoc
      */
-    public function addLast($value)
+    public function addLast($value = null)
     {
         return $this->add($value, $this->getSize());
     }
@@ -98,7 +98,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     /**
      * @inheritdoc
      */
-    public function addBefore($value, $queue)
+    public function addBefore($value = null, $queue)
     {
         $position = $this->getPosition($queue);
 
@@ -112,7 +112,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     /**
      * @inheritdoc
      */
-    public function addAfter($value, $queue)
+    public function addAfter($value = null, $queue)
     {
         $position = $this->getPosition($queue);
 
@@ -166,6 +166,6 @@ abstract class AbstractList implements ListInterface, \Iterator
      */
     public function valid()
     {
-        return !empty($this->currentNode) && $this->currentNode->getData() !== null;
+        return !empty($this->currentNode);
     }
 }
