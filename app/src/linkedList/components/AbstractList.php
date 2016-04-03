@@ -5,31 +5,37 @@ namespace app\src\linkedList\components;
 abstract class AbstractList implements ListInterface, \Iterator
 {
     /**
+     * The count of elements in the list
      * @var integer
      */
     protected $size = 0;
 
     /**
+     * Link to first node in the list
      * @var ListNodeInterface
      */
     protected $firstNode = null;
 
     /**
+     * Link to last node in the list
      * @var ListNodeInterface
      */
     protected $lastNode = null;
 
     /**
+     * Link to current node in the list (for Iterator interface)
      * @var ListNodeInterface
      */
     protected $currentNode = null;
 
     /**
+     * Number of current position in the list (for Iterator interface)
      * @var integer
      */
     protected $currentPosition = 0;
 
     /**
+     * Return count of elements in the list
      * @return integer
      */
     public function getSize()
@@ -133,7 +139,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     public function rewind()
     {
         $this->currentPosition = 0;
-        $this->currentNode = $this->getFirst();
+        $this->currentNode = &$this->getFirst();
     }
 
     /**
@@ -158,7 +164,7 @@ abstract class AbstractList implements ListInterface, \Iterator
     public function next()
     {
         $this->currentPosition++;
-        $this->currentNode = $this->currentNode->getNext();
+        $this->currentNode = &$this->currentNode->getNext();
     }
 
     /**

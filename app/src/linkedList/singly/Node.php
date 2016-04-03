@@ -7,11 +7,13 @@ use app\src\linkedList\components\ListNodeInterface;
 class Node implements ListNodeInterface
 {
     /**
-     * @var midex
+     * Node data
+     * @var mixed
      */
     protected $data;
 
     /**
+     * Link to next node
      * @var Node
      */
     protected $next;
@@ -34,7 +36,7 @@ class Node implements ListNodeInterface
      */
     public function setNext(ListNodeInterface $node = null)
     {
-        $this->next = $node;
+        $this->next = &$node;
     }
 
     /**
